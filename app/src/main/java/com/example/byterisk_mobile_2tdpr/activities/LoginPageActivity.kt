@@ -1,6 +1,9 @@
-package com.example.byterisk_mobile_2tdpr
+package com.example.byterisk_mobile_2tdpr.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -9,8 +12,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.byterisk_mobile_2tdpr.R
 
-class MainActivity : AppCompatActivity() {
+class LoginPageActivity : AppCompatActivity() {
     // Declaração das variáveis
     lateinit var emailInput: EditText
     lateinit var passwordInput: EditText
@@ -19,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login_page)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -47,7 +51,12 @@ class MainActivity : AppCompatActivity() {
             // Verifica as credenciais
             if (email == "byterisk@odontoprev.com" && password == "ByteRisk123") {
                 messageText.text = "Credenciais aceitas, redirecionando..."
-                // Aqui você pode implementar a lógica para redirecionar o usuário
+                // Redirecionar após 3 segundos
+                Handler(Looper.getMainLooper()).postDelayed({
+                    val intent = Intent(this, HomeByteriskActivity::class.java)
+                    startActivity(intent)
+                    // Fecha a LoginPageActivity para que o usuário não possa voltar para ela ao pressionar 'voltar'
+                }, 3000) // 3000 milissegundos = 3 segundos
             } else {
                 messageText.text = "Credenciais erradas, por gentileza inclua novamente."
                 // Limpar os campos
