@@ -3,11 +3,7 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@android:drawable/ic_menu_view"
-        android:title="Início" />
-    <item
-        android:id="@+id/nav_dashboard"
-        android:icon="@android:drawable/ic_menu_manage"
-        android:title="Dash" />
+        android:title="Home" />
     <item
         android:id="@+id/nav_grid"
         android:icon="@android:drawable/ic_menu_gallery"

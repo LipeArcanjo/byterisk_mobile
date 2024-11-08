@@ -25,7 +25,7 @@
         <activity android:name=".activities.LoginPageActivity" />
         <activity android:name=".activities.HomeByteriskActivity" />
         <activity android:name=".activities.EmployeesActivity" />
-
+        <activity android:name=".activities.GridPageActivity" />
     </application>
 
 </manifest>

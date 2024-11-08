@@ -17,6 +17,12 @@ object MenuNavigation {
                     context.startActivity(intent)
                     true
                 }
+                R.id.nav_grid -> {
+                    val intent = Intent(context, GridPageActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    context.startActivity(intent)
+                    true
+                }
                 R.id.nav_employees -> {
                     val intent = Intent(context, EmployeesActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
