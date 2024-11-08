@@ -1,6 +1,7 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services") // Plugin para o Google Services
 }
 
 android {
@@ -36,7 +37,15 @@ android {
 }
 
 dependencies {
+    // Firebase BoM para alinhar todas as versões do Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
 
+    // Adicione as bibliotecas que você precisa. As versões serão controladas pelo BoM.
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-database-ktx")
+
+    // Dependências do projeto
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

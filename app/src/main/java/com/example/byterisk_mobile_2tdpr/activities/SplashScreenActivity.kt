@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.byterisk_mobile_2tdpr.LoginPageActivity
 import com.example.byterisk_mobile_2tdpr.R
 
 class SplashScreenActivity : AppCompatActivity() {

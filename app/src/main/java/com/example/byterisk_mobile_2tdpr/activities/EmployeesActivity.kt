@@ -1,6 +1,7 @@
 package com.example.byterisk_mobile_2tdpr.activities
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -9,49 +10,48 @@ import com.example.byterisk_mobile_2tdpr.adapters.EmployeeAdapter
 import com.example.byterisk_mobile_2tdpr.models.Employee
 import com.example.byterisk_mobile_2tdpr.utils.MenuNavigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class EmployeesActivity : AppCompatActivity() {
+
+    private lateinit var employeeRecyclerView: RecyclerView
+    private lateinit var employeeAdapter: EmployeeAdapter
+    private lateinit var employeeList: MutableList<Employee>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employees)
 
-        // Inicializando a lista de funcionários com dados reais
-        val employeeList = listOf(
-            Employee(
-                profileImageRes = R.drawable.arcanjo, // Substitua por suas imagens reais
-                name = "Felipe Arcanjo Matos dos Santos",
-                rm = "RM: 554018",
-                location = "São Paulo",
-                institution = "FIAP",
-                username = "LipeArcanjo"
-            ),
-            Employee(
-                profileImageRes = R.drawable.rabelo,
-                name = "Gustavo Rabelo Frere",
-                rm = "RM: 553326",
-                location = "São Paulo",
-                institution = "FIAP",
-                username = "GustaFrere"
-            ),
-            Employee(
-                profileImageRes = R.drawable.celo,
-                name = "Marcelo Vieira Junior",
-                rm = "RM: 553640",
-                location = "São Paulo",
-                institution = "FIAP",
-                username = "MarceloJunior"
-            )
-        )
+        employeeRecyclerView = findViewById(R.id.employeeRecyclerView)
+        employeeList = mutableListOf()
+        employeeAdapter = EmployeeAdapter(employeeList)
+        employeeRecyclerView.adapter = employeeAdapter
 
         // Configurar RecyclerView com Adapter
-        val recyclerView = findViewById<RecyclerView>(R.id.employeeRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = EmployeeAdapter(employeeList)
+        val database = FirebaseDatabase.getInstance()
+        val employeesRef = database.getReference("employees")
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         // Configurar a navegação no menu inferior e marcar o ícone correto
         bottomNavigationView.selectedItemId = R.id.nav_employees
         MenuNavigation.setupBottomNavigation(this, bottomNavigationView)
+
+        employeesRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                employeeList.clear()
+                for (employeeSnapshot in snapshot.children) {
+                    val employee = employeeSnapshot.getValue(Employee::class.java)
+                    employee?.let { employeeList.add(it) }
+                }
+                employeeAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("EmployeesActivity", "loadEmployee:onCancelled", error.toException())
+            }
+        })
     }
 }

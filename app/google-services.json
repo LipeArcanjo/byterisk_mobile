@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "813470625474",
+    "project_id": "byterisk-mobile",
+    "storage_bucket": "byterisk-mobile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813470625474:android:6ff772872435e2f7ce555b",
+        "android_client_info": {
+          "package_name": "com.example.byterisk_mobile_2tdpr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_bg5F93zUJydba6G71enVWdUSStZQdz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
