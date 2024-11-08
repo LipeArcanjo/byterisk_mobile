@@ -4,11 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.byterisk_mobile_2tdpr.LoginPageActivity
-import com.example.byterisk_mobile_2tdpr.R
+import com.example.byterisk_mobile_2tdpr.*
 
 class SplashScreenActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
@@ -20,7 +18,6 @@ class SplashScreenActivity : AppCompatActivity() {
         buttonStart.setOnClickListener {
             val intent = Intent(this, LoginPageActivity::class.java)
             startActivity(intent)
-            finish() // Finaliza a splash screen para que o usuário não possa voltar a ela.
-        }
+           }
     }
 }
