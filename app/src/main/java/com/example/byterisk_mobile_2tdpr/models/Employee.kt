@@ -1,5 +1,4 @@
 package com.example.byterisk_mobile_2tdpr.models
-
 data class Employee(
     val profileImageRes: Int,
     val name: String,
